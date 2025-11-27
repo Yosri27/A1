@@ -1,4 +1,20 @@
-/*
+
+
+***************
+essay
+*****************
+
+1- for of tmam m3 string aw array aw object lkn for each array bs
+
+2- hoisting: variable at3rf 2blha get a3ml log leh  htl3 undefined lw b3dha 3ady.
+    TDZ: cannot access mo3tmd 3la el scope.
+
+3- == compare value
+   === compare value and data type
+4-  try w catch bgrb el code 3l4an lw fe error ytl3 fe el catch w mohama 3l4an m4 bt2oef el server 
+
+
+
 
 
 
