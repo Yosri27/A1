@@ -1,11 +1,12 @@
-/*
-## 1
+
+// ## 1
+function one(){
 let x = "123"
 console.log(Number(x) + 7);
+}
 
-
-## 2
-
+// ## 2
+function two(){
 let x = 0
 if ((+Boolean(x)) == false)
     {
@@ -13,9 +14,11 @@ if ((+Boolean(x)) == false)
         
 
     } 
+}
 
-##3
+// ##3
 
+function three(){
 for (let x = 1; x < 10; x+=2)
     {
     
@@ -24,9 +27,9 @@ for (let x = 1; x < 10; x+=2)
 
 
     }
-
-    #4
-
+}
+    // #4
+function four(){
 x = [1,2,3,4,5] 
 even = x.filter(slash)
 
@@ -41,7 +44,7 @@ if (value % 2 == 0) {
 }
 
 
-
+}
 
 
 
@@ -51,14 +54,14 @@ if (value % 2 == 0) {
 
     #5
 
-
-    x = [1,2,3] 
+function five(){
+x = [1,2,3] 
 y = [4,5,6]
 
 console.log(...x,...y);
-
-#6 
-
+}
+// #6 
+function six(){
 let date= 9;
 switch (date) {
     case 1:
@@ -87,10 +90,10 @@ switch (date) {
         
         break;
 }
+}
 
-
-##7
-
+// ##7
+function seven(){
 x = ["a","ab","abc"]
 l = []
 for (let i = 0; i < x.length; i++) {
@@ -99,9 +102,11 @@ for (let i = 0; i < x.length; i++) {
     
 }
 console.log(l);
+}
 
+// ## 8
 
-## 8
+function eight(){
 x = 125;
 switch (true) {
      case x % 3 == 0 && x % 5 ==0:
@@ -118,14 +123,17 @@ switch (true) {
     
         break;
 }
-##9
-
+}
+// ##9
+function nine(){
 x = 5 ;
 
  let power = (x) => {return Math.pow(x,2)}
 console.log(power());
+}
+// ##10
 
-##10
+function ten(){
 const person ={name:"john", age:25}
 result = Object.keys(person);
 for (let i = 0; i < result.length; i++) {
@@ -134,9 +142,11 @@ for (let i = 0; i < result.length; i++) {
     
     
 }
+}
 
-##11
 
+// ##11
+function elven(){
 arr=[1,2,3,4,5,6];
 let result = 0;
 
@@ -151,9 +161,9 @@ function Sum(x)
     
 }
 console.log(Sum(arr));
-
-## 12
-
+}
+// ## 12
+function twelve(){
 function call(age)
 {
     return new Promise((resolve , reject)=>
@@ -180,10 +190,10 @@ call(25).then((message)=>
             
 
         })
+}
 
-
-##13
-
+// ##13
+function thrtieen(){
 arr=[1,3,7,2,4];
 let k = 0;
 
@@ -202,9 +212,11 @@ function Max(x)
     
 }
 console.log(Max(arr));
+}
 
-##14
 
+// ##14
+function fourteen(){
 person ={name:"john", age:25}
 result = Object.keys(person);
 function solve(obj)
@@ -213,8 +225,8 @@ function solve(obj)
 }
 console.log(solve(person));
 
+}
 
 
 
-*/
 
