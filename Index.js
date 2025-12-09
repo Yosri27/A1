@@ -1,232 +1,150 @@
+// const path = require ('path');
+const path = require ('path');
+const fs   = require('fs');
 
-// ## 1
-function one(){
-let x = "123"
-console.log(Number(x) + 7);
-}
-
-// ## 2
-function two(){
-let x = 0
-if ((+Boolean(x)) == false)
-    {
-        console.log("invalid");
-        
-
-    } 
-}
-
-// ##3
-
-function three(){
-for (let x = 1; x < 10; x+=2)
-    {
-    
-        console.log(x);
-        
-
-
-    }
-}
-    // #4
-function four(){
-x = [1,2,3,4,5] 
-even = x.filter(slash)
-
- function slash(value)
+function One()
 {
- 
-if (value % 2 == 0) {
-    console.log(value);
+   
+console.log(__dirname);
+console.log(__filename);
     
 }
-    
-}
+
+function Two(){
+const xpath = "/user/files/report.pdf";
+y = path.parse(xpath);
+return(y.base);
 
 
 }
+function Three(){
 
 
+y = path.format(xpath);
+return y;
+
+}
+function Four(){
+
+    const xpath = "/docs/readme.md";
+
+x = path.parse(xpath);
+return(x.ext);
 
 
-
-
-
-    #5
+}
 
 function five(){
-x = [1,2,3] 
-y = [4,5,6]
 
-console.log(...x,...y);
+const xpath = "/home/app/main.js";
+
+x = path.parse(xpath);
+
+return {
+    Name: x.name,
+    Ext:  x.ext
+
 }
-// #6 
+}
 function six(){
-let date= 9;
-switch (date) {
-    case 1:
-        console.log("Sunday");
-        break;
-   case 2:
-        console.log("Monday");
-        break;
-    case 3:
-        console.log("Tuesday");
-        break;
-    case 4:
-        console.log("Wednesday");
-        break;
-    case 5:
-        console.log("Thursday");
-        break;        
-    case 6:
-        console.log("Friday");
-        break;    
-    case 7:
-        console.log("Saturday");
-        break;                
-    default:
-        console.log("error");
-        
-        break;
-}
-}
 
-// ##7
-function seven(){
-x = ["a","ab","abc"]
-l = []
-for (let i = 0; i < x.length; i++) {
-    
-    l.push(x[i].length);
-    
-}
-console.log(l);
-}
+const xpath = "/home/user/file.txt";
 
-// ## 8
+x = path.isAbsolute(xpath);
+return x
+}
+function seven(...k){
 
+
+x = path.join(...k)
+return x
+}
 function eight(){
-x = 125;
-switch (true) {
-     case x % 3 == 0 && x % 5 ==0:
-        console.log("divisible by both");    
-        break;    
-    case x % 3 == 0:
-        console.log("divisible by 3");
-        break;
-    case x % 5 == 0:
-        console.log("divisible by 5");    
-        break;
-   
-    default:console.log("Error");
-    
-        break;
-}
-}
-// ##9
-function nine(){
-x = 5 ;
 
- let power = (x) => {return Math.pow(x,2)}
-console.log(power());
+const xpath = "./index.js";
+x = path.resolve(xpath)
+return x
 }
-// ##10
 
+function nine(...k){
+
+
+x = path.join(...k)
+return x
+}
 function ten(){
-const person ={name:"john", age:25}
-result = Object.keys(person);
-for (let i = 0; i < result.length; i++) {
-
-    console.log(person[result[i]]);
-    
-    
-}
-}
-
-
-// ##11
-function elven(){
-arr=[1,2,3,4,5,6];
-let result = 0;
-
-function Sum(x)
-{   
-    for (let i = 0; i < x.length; i++)
-    {
-        
-        result += x[i];
+ const xpath = "C:/Users/20102/Desktop/node js/file.txt";
+      fs.access(xpath,  (err) => {
+    if (err) {
+      console.log("File does not exist");
+    } else {
+      fs.unlink(xpath, (err) => {
+        if (err) {
+          console.log("Error deleting file:", err);
+        } else {
+          console.log("File deleted successfully");
+        }
+      });
     }
-    return result;
-    
+ });
 }
-console.log(Sum(arr));
-}
-// ## 12
-function twelve(){
-function call(age)
-{
-    return new Promise((resolve , reject)=>
-        {
-            setTimeout(()=>{
-            if (age > 18) {
-                resolve("success");
-            }else
-                {
-                    reject("la");
-                }
-        },3000)
-        })
 
-}
-call(25).then((message)=>
-    {
-        console.log(message);
-        
-
-    }).catch((err)=>
+ function elven(){
+ 
+ events.on("log",(msg)=>
         {
-            console.log(err);
+
+            console.log(msg);
             
-
+            
         })
-}
+        events.emit("log","Welcome event triggered!")
+ }
 
-// ##13
-function thrtieen(){
-arr=[1,3,7,2,4];
-let k = 0;
+const {EventEmitter} = require('events');
+const events = new EventEmitter()
 
-function Max(x)
-{   
-   result = x.filter((ele,index,arr)=>
+ function triteen(){
+    
+    events.on("log",(msg)=>
         {
 
-           if (k < ele)
-            {
-                k = ele;
-            }
-
+            return console.log("User Logged in",msg);
+            
         })
-        return k;
+        events.emit("log","Ahmed")
+
     
 }
-console.log(Max(arr));
+
+ function fifteen(){
+    
+  xpath ="C:/Users/20102/Desktop/node js/file.txt";
+    fs.writeFile(xpath, '7amo', 'utf-8', (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("ok");
+    }
+  });
 }
 
+ function sixteen(){
+    
+    xpath="C:/Users/20102/Desktop/node js/file.txt";
 
-// ##14
-function fourteen(){
-person ={name:"john", age:25}
-result = Object.keys(person);
-function solve(obj)
-{
-    return Object.keys(obj);   
-}
-console.log(solve(person));
+    y = fs.existsSync(xpath);
+    return y; 
+ }
 
-}
+const os =  require('os')
 
+ function Seventeen(){
+ 
+    
 
+console.log(`OS Platform: ${os.platform()}`);
 
-
+console.log(`CPU Architecture: ${os.arch()}`);
+ }
+    
