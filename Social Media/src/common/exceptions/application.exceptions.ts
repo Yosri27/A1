@@ -24,7 +24,7 @@ export class BadRequestException extends ApplicationExceptions
     }
 }
 
-export class ConflictExceptione extends ApplicationExceptions 
+export class ConflictException extends ApplicationExceptions 
 {
     constructor(message: string , cause?:unknown)
     {

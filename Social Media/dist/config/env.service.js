@@ -1,0 +1,17 @@
+import { config } from "dotenv";
+import path from "path";
+config({ path: path.resolve(`./.env.${process.env.NODE_ENV}`) });
+const mongoURL = process.env.MONGO_URI;
+const port = process.env.PORT;
+const mood = process.env.MOOD;
+const salt = process.env.SALT;
+const JWT_KEY = process.env.JWT_KEY;
+const ADMIN_SIGNATURE = process.env.JWT_ADMIN_SIGNATURE;
+const USER_SIGNATURE = process.env.JWT_USER_SIGNATURE;
+const Redis_URL = process.env.REDIS_URI;
+const userRefreshSignature = process.env.JWT_USER_REFRESH_SIGNATURE;
+const adminRefreshSignature = process.env.JWT_ADMIN_REFRESH_SIGNATURE;
+const JWT_Audiance = process.env.JWT_AUDIENCE;
+const EmailUser = process.env.EmailUser;
+const EmailPass = process.env.EmailPass;
+export const env = { port, mongoURL, mood, salt, JWT_KEY, ADMIN_SIGNATURE, USER_SIGNATURE, Redis_URL, userRefreshSignature, adminRefreshSignature, JWT_Audiance, EmailUser, EmailPass };

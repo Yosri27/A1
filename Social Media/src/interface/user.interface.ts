@@ -2,12 +2,18 @@ import {GenderEnums, RoleEnums, ProviderEnums} from '../enums/index.js'
 
 export interface Iuser
 {
-    fullName:string,
-    fistName:string,
-    LastName:string,
+    userName:string,
+    firstName:string,
+    lastName:string,
     email:string,
-    Password:string,
-    gender:GenderEnums,
-    Role:RoleEnums,
-    Provider:ProviderEnums
+    phone: string,
+    profilePic?:string,
+    profileCoverPic?:string[],
+    password:string,
+    gender?:GenderEnums,
+    Role?:RoleEnums,
+    provider?:ProviderEnums,
+    confirmEmail:boolean,
+    createdAt?:Date,
+    updatedAt?:Date
 }

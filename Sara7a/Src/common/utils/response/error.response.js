@@ -1,4 +1,4 @@
-import {env }from "../../../../Config/index.js";
+import { env }from "../../../../Config/index.js";
 
 export const ErrorResponse = ({status = 400, message = "Something went wrong", extra = undefined}) =>
     {

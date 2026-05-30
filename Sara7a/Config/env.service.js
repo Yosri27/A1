@@ -7,4 +7,5 @@ const salt = process.env.SALT;
 const JWT_KEY = process.env.JWT_KEY;
 const ADMIN_SIGNATURE = process.env.JWT_ADMIN_SIGNATURE;
 const USER_SIGNATURE = process.env.JWT_USER_SIGNATURE;
-export const env ={port,mongoURL,mood,salt,JWT_KEY,ADMIN_SIGNATURE,USER_SIGNATURE};
+const REDIS_URI = process.env.REDIS_URI;
+export const env ={port,mongoURL,mood,salt,JWT_KEY,ADMIN_SIGNATURE,USER_SIGNATURE,REDIS_URI};

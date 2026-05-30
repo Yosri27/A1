@@ -1,7 +1,7 @@
 import {UserModel} from "../../database/models/index.js";
 import { BadRequestException, conflictException, NotFoundException , UnauthorizedException } from "../../common/utils/response/error.response.js";
 import { ProviderEnum } from "../../common/enums/enum.service.js";
-import { get } from "mongoose";
+// import { get, set } from "mongoose";
 import { findOne, insertOne } from "../../database/database.service.js";
 import bcrypt,{hash , compare} from "bcrypt";
 import { env } from "../../../Config/index.js";
@@ -9,22 +9,24 @@ import { generateHash, compareHash } from "../../common/index.js";
 import jwt from "jsonwebtoken";
 import { generateToken } from "./../../common/index.js";
 import { OAuth2Client } from "google-auth-library";
-
-
-
+import {set} from "../../database/redis.service.js"
 
 
 
 export const signup = async (data) => 
     {
-        let {userName,email , password }= data;
+        console.log(data);
+        
+        let {username,email , password }= data;
         let existUser = await UserModel.findOne({email});
+        console.log(existUser);
+        
         if(existUser)
             {
                 return conflictException({message : "Email already exist"})
             }    
         let hashedPassword = await generateHash(password);   
-        let addedUser = await UserModel.insertOne({userName, email ,password: hashedPassword})
+        let addedUser = await UserModel.insertOne({username, email ,password: hashedPassword})
         return addedUser;    
 
     }
@@ -32,13 +34,19 @@ export const signup = async (data) =>
 export const login = async(data,host)=>
     
 {
+    
+    
     //await UserModel.findOne({email , password , provider:ProviderEnum.System})
         let {email , password} = data;
         let existUser = await findOne({model:UserModel,filter:{email , provider:ProviderEnum.System}})
+        // console.log(existUser);
+        
         if(existUser)
             {
                 // console.log(existUser.role);
                 let { token } = generateToken(existUser,host)
+                // console.log(token);
+                
                 const isMatched = await compareHash(password,existUser.password); 
                
             
@@ -48,12 +56,7 @@ export const login = async(data,host)=>
                     return { existUser , accessToken, refreshToken}};
                 }
                 NotFoundException({message:"User Not Found"})    
-            }
-            
-
-    
-        
-      
+            }    
 
 export const forgetPassword = async(data)=>
     {
@@ -155,4 +158,14 @@ export const signupMail = async (data)=>
                         } 
 
                     }
+    }
+ 
+export const logout = async (req)=>
+    {
+        let rediskey = `refreshToken::${req.userId}::${req.token}`
+        await set({
+            key: rediskey,
+            value : 0,
+            ttl : req.decoded.iat + 30 * 60
+        })
     }

@@ -1,17 +1,17 @@
-export const enum GenderEnums 
+export  enum GenderEnums 
 {
-    Male,
-    Female
+    Male= "male",
+    Female= "female"
 }
 
-export const enum RoleEnums
+export  enum RoleEnums
 {
-    Admin,
-    User
+    Admin= "Admin",
+    User="User"
 }
 
-export const enum ProviderEnums
+export  enum ProviderEnums
 {
-    System,
-    Google
+    System = "System",
+    Google = "Google"
 }

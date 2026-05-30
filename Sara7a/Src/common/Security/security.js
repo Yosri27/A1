@@ -10,11 +10,13 @@ export const generateToken = (User,host) =>
                         switch (User.role) {
                             case "Admin":
                                 signature = env.ADMIN_SIGNATURE;
+                                refreshSignature = env.ADMIN_SIGNATURE;
                                 audience ="Admin";
                                 break;
                         
                             default:
                                 signature = env.USER_SIGNATURE;
+                                refreshSignature = env.USER_SIGNATURE;
                                 audience = "User";
                                 break;
                         }
@@ -26,6 +28,7 @@ export const generateToken = (User,host) =>
         // issuer:`${host}`,
         audience
 })
+if (!refreshSignature) refreshSignature = signature;
 let refreshToken = jwt.sign({id : User._id},refreshSignature,{
     expiresIn:"1y",
     // notBefore:"1m",

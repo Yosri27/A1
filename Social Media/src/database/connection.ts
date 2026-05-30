@@ -1,7 +1,16 @@
 import mongoose from 'mongoose';
+import { env } from '../config/env.service.js';
 
 
 export const DbConnection = async () =>
     {
-        await mongoose.connect("mongodb://localhost:27017/SocialMedia")
+         mongoose.connect(env.mongoURL).then(()=>
+            {
+                console.log(" mongo database connected");
+                
+            }).catch((err)=>
+                {
+                    console.log(err);
+                    
+                })
     }
