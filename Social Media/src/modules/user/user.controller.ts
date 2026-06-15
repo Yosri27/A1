@@ -23,4 +23,12 @@ router.patch("/update-profile",auth ,uploadFile({storagekey: MulterEnum.diskStor
     })    
 
 
+router.patch("/update-cover-pic",auth ,uploadFile({storagekey: MulterEnum.diskStorage}).array("files"),async(req : Request, res:Response)=>
+    {
+        console.log(req.file);
+        
+        let userdata = await userservice.updateCoverPic(req.userid as string, req.files as Express.Multer.File[])
+         SccuessResponse({res,message:"tmam",data: userdata})
+    })        
+
 export default router

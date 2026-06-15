@@ -23,24 +23,40 @@ export class UserService
         return userdata
     }
 
-    async updateUserprofile(userid : string,file : Express.Multer.File):Promise<HydratedDocument<Iuser>>
+    async updateUserprofile(userid : string,file : Express.Multer.File):Promise<{userdata: HydratedDocument<Iuser>, url : string}>
     {
         let userdata = await this.userReposatory.findById(userid,"-password")
         if (!userdata) {
             throw new BadRequestException("no data found")
         }
-        if(file)
-            {
-                userdata.profilePic = await s3service.uploadAsset({
-                    storagekey: MulterEnum.diskStorage,
+     
+                let  {url,key} = await s3service.createPresignedUrl({
                     path:`${userdata._id}/profile-pic`,
-                    file
-                }) as unknown as string
+                }) 
+                // await userdata.save()
+                userdata.profilePic = key as string
                 await userdata.save()
+         
+            return {userdata,url}
+        }
+
+   async updateCoverPic(userid : string,files : Express.Multer.File[]):Promise<HydratedDocument<Iuser>>
+    {
+        let userdata = await this.userReposatory.findById(userid,"-password")
+        if (!userdata) {
+            throw new BadRequestException("no data found")
+        }
+        if(files.length > 0)
+            {
                 
             }
             return userdata
 }
+
+
+
+
+
 }
 
 export const userservice = new UserService()

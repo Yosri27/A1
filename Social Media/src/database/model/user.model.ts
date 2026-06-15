@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 import { GenderEnums, ProviderEnums ,RoleEnums} from "../../enums/index.js";
 import { Iuser } from "../../interface/user.interface.js";
+import { SecurityService } from "../../common/utils/security/hash.security.js";
 
 
+const securityService = new SecurityService()
 const userSchema = new mongoose.Schema({
     firstName : {
         type : String,
@@ -80,22 +82,47 @@ userSchema.virtual('userName').set(function(value){
 })
 
 
-userSchema.pre("validate", async function()
-    {
-        console.log("  Pre Validate");
+// userSchema.pre("validate", async function()
+//     {
+//         console.log("  Pre Validate");
         
 
-    })
+//     })
 
-    userSchema.post("validate", async function()
-    {
-        console.log("Post Validatee");
-        if (this.firstName.length > 5) {
-            console.log("name is too short");
+//     userSchema.post("validate", async function()
+//     {
+//         console.log("Post Validatee");
+//         if (this.firstName.length > 5) {
+//             console.log("name is too short");
             
-        }
+//         }
         
-    })
+//     })
+
+// userSchema.pre("save", async function()
+//     {
+
+//         if(this.isModified("password"))
+//         {   
+//         this.password = await securityService.generateHash({plaintext:this.password})
+//         }
+//     })
+
+
+userSchema.pre("findOne",function(this :any){
+        console.log("------");
+        
+        let query = this.getfilter()
+        this.setquery ({
+
+            ...query,
+            isDeleted: false
+        })
+        console.log(this.getquery);
+        
+})
+    
+
 
 
 export const userModel = mongoose.model<Iuser>("user",userSchema)
