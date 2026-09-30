@@ -24,7 +24,10 @@ export const Bootstrap = async()=>{
 
   app.get('/uploads/*path', async(req : Request,res : Response)=>
     {
+        
+        let {download , fileName} = req.query
         let {path} = req.params as {path : string[]}
+
         if(path.length == 0)
             {
                 throw new BadRequestException("path is required")
@@ -32,8 +35,43 @@ export const Bootstrap = async()=>{
             let key = path.join("/")
             let {Body , ContentType} = await s3service.getAsset({key : key})
             s3GetFile(Body as NodeJS.ReadableStream , res)
-            SccuessResponse({res,message:"user profile data",data: key})
+            res.setHeader(
+                "Content-Type",
+                ContentType || "application/octet-stream"
+            );
+            res.set("Cross-Origin-Resource-Policy","cross-origin");
+            if (download == "true")
+            {
+                res.setHeader("Content-Disposition",`attachment; filename="${fileName || key.split("/").pop()}" `)    
+            }
+            return res
+    })
 
+    
+  app.get('/presign/*path', async(req : Request,res : Response)=>
+    {
+        
+        let {download , fileName} = req.query as {download :  string , fileName : string}
+        let {path} = req.params as {path : string[]}
+
+        if(path.length == 0)
+            {
+                throw new BadRequestException("path is required")
+            }
+            let key = path.join("/")
+            let url = await s3service.createPresignfetchurl({Key : key,fileName,download})
+            SccuessResponse({res, data: url})
+            // s3GetFile(Body as NodeJS.ReadableStream , res)
+            // res.setHeader(
+            //     "Content-Type",
+            //     ContentType || "application/octet-stream"
+            // );
+            // res.set("Cross-Origin-Resource-Policy","cross-origin");
+            // if (download == "true")
+            // {
+            //     res.setHeader("Content-Disposition",`attachment; filename="${fileName || key.split("/").pop()}" `)    
+            // }
+            // return res
     })
 
 

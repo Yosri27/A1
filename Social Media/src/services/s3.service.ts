@@ -1,5 +1,5 @@
 
-import { GetObjectCommand, ObjectCannedACL, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { DeleteObjectCommand, GetObjectCommand, GetObjectCommandOutput, ObjectCannedACL, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import {env} from './../config/index.js';
 import { MulterEnum } from '../enums/multer.enums.js';
 import { createReadStream } from 'fs';
@@ -147,15 +147,52 @@ export class s3Service {
     bucket?: string;
     key: string;
       }) {
-    const result = new GetObjectCommand({
+    const result = await new GetObjectCommand({
       Bucket: bucket,
       Key: key,
       });
     return this.Client.send(result);
   }
 
-
+      async deleteAsset({
+    
+    bucket = env.aws_bucket_name,
+    key
+  }: { 
+    bucket?: string;
+    key: string;
+      }) {
+    const result = await new DeleteObjectCommand({
+      Bucket: bucket,
+      Key: key,
+      });
+    return this.Client.send(result);
   }
+
+  async createPresignfetchurl ({
+    Bucket = env.aws_bucket_name,
+    Key,
+    fileName,
+    download
+  }:{
+    Bucket?:string
+    Key:string
+    fileName? :string
+    download? :string
+  }):Promise<string>{
+    
+    const result = new GetObjectCommand({
+      Bucket,
+      Key,
+      ResponseContentDisposition : download == "true" ? `attachment; filename="${fileName || Key.split("/").pop()}" ` : undefined
+    })
+    
+    const url = await getSignedUrl(this.Client,result,{expiresIn: 60 * 2})
+    return url
+    }
+  }
+
+  
 
 
 

@@ -29,6 +29,11 @@ export class UserService
         if (!userdata) {
             throw new BadRequestException("no data found")
         }
+        if (userdata.profilePic) {
+            await s3service.deleteAsset({
+                key:userdata.profilePic
+            })
+        }
      
                 let  {url,key} = await s3service.createPresignedUrl({
                     path:`${userdata._id}/profile-pic`,

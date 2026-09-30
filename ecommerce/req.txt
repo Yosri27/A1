@@ -1,0 +1,9 @@
+- cart
+- categories
+- user
+- products
+- sub categories
+- orders
+- brands
+- wish list
+- coupons
